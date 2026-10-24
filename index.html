@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0c151e">
+<meta name="description" content="Подсчёт восхождений на тумбу, контроль видимой техники и расчёт баллов по возрастным нормативам упражнения № 29.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Восхождения">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icons/icon-180.png">
+<title>Восхождения на тумбу – Упражнение № 29</title>
+<style>
+:root {color-scheme:dark;--bg:#0c151e;--panel:#172632;--panel2:#1d303e;--border:#334857;--text:#ecf4f5;--muted:#a1b5c1;--green:#62e0a9;--amber:#ffd388;--red:#ff8f91;--blue:#9dc9ff}
+*{box-sizing:border-box}
+html{min-height:100%;background:var(--bg)}body{margin:0;color:var(--text);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:radial-gradient(ellipse at top,#1d3541 0%,#0c151e 60%);padding:max(16px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(25px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));min-height:100dvh}
+main{max-width:1140px;margin:0 auto}.eyebrow{color:var(--green);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;font-weight:750}
+h1{font-size:clamp(1.8rem,4vw,2.9rem);line-height:1.13;margin:8px 0;letter-spacing:-.045em}h2{font-size:1.06rem;margin:0 0 12px}.subtitle{color:var(--muted);margin:0 0 20px;line-height:1.5;font-size:.96rem}
+.layout{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(300px,1fr);gap:15px;align-items:start}.stack{display:grid;gap:15px}.card{background:linear-gradient(145deg,#1a2b38,#13222e);border:1px solid var(--border);border-radius:17px;overflow:hidden;box-shadow:0 12px 30px #0002}.pad{padding:17px}.topbar{padding:12px 15px;display:flex;justify-content:space-between;align-items:center;gap:10px}.badge{color:var(--muted);border-radius:30px;font-size:.8rem;background:#263b49;padding:6px 10px;text-align:right}.badge.good{color:var(--green);background:#1f4039}.badge.warn{color:var(--amber);background:#4d3d2b}.badge.bad{color:var(--red);background:#4e3033}
+.stage{position:relative;background:#08121b;aspect-ratio:4/3;overflow:hidden;touch-action:manipulation}.stage video,.stage canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.stage video{z-index:1}.stage canvas{z-index:2;pointer-events:none}.stage.mirror video,.stage.mirror canvas{transform:scaleX(-1)}.stage.calibrating{outline:3px solid var(--amber);outline-offset:-3px;cursor:crosshair}.empty{display:flex;align-items:center;justify-content:center;position:absolute;inset:0;text-align:center;padding:22px;color:var(--muted);line-height:1.55;flex-direction:column;gap:12px}.empty svg{width:85px;height:85px;opacity:.75}.empty[hidden]{display:none}.calibprompt{position:absolute;z-index:5;left:10px;right:10px;bottom:12px;text-align:center;background:#1b2b33ed;border:1px solid var(--amber);border-radius:9px;color:var(--amber);padding:10px;font-size:.85rem;pointer-events:none}.calibprompt[hidden]{display:none}
+.flag{position:absolute;z-index:6;top:35%;left:6%;right:6%;text-align:center;font-size:clamp(1.4rem,3vw,2rem);font-weight:850;padding:15px 9px;background:#1c473aef;border:2px solid var(--green);border-radius:13px;box-shadow:0 6px 36px #000b}.flag.no{background:#6a292ce9;border-color:var(--red)}.flag small{display:block;font-size:.78rem;font-weight:600;margin-top:5px;line-height:1.45}.flag[hidden]{display:none}
+.instruct{padding:12px 15px;color:var(--muted);font-size:.85rem;line-height:1.55}.instruct b{color:var(--text)}.controls{display:flex;flex-wrap:wrap;gap:8px;padding:0 15px 15px}button,select{font:inherit}button{min-height:46px;padding:11px 14px;border:0;border-radius:9px;cursor:pointer;font-weight:730}button:disabled{opacity:.43;cursor:not-allowed}button:not(:disabled):active{transform:scale(.98)}.primary{background:var(--green);color:#102a24;flex:1}.secondary{background:#324d60;color:var(--text)}.outline{background:transparent;border:1px solid #5b7181;color:var(--text)}.active{background:var(--amber);color:#162028}.wide{width:100%}
+.setup{padding:17px}.two{display:grid;grid-template-columns:1fr 1fr;gap:11px}.fieldlabel{color:var(--muted);font-size:.8rem;display:block;font-weight:720;margin:0 0 7px}select{height:45px;width:100%;background:#273d4b;color:var(--text);border:1px solid #536e7d;border-radius:9px;padding:0 10px}.linebuttons{display:flex;gap:8px}.linebuttons button{flex:1;font-size:.83rem;padding:8px 6px}.setup-note{color:var(--muted);font-size:.8rem;line-height:1.5;margin:10px 0 0}.levels{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:11px}.level{background:#213541;border:1px solid #344c5b;border-radius:9px;padding:9px 10px;font-size:.8rem;color:var(--muted)}.level b{display:block;color:var(--text);margin-top:3px;font-size:.95rem}.readymsg{color:var(--amber);font-size:.83rem;margin:13px 0 0}.readymsg.ok{color:var(--green)}
+.scores{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:6px;padding:18px}.score{background:#213542;border:1px solid #344c5b;border-radius:13px;padding:14px 8px;text-align:center}.score span{color:var(--muted);font-size:.79rem}.score strong{display:block;font-size:clamp(2.1rem,5vw,4rem);color:var(--green);font-variant-numeric:tabular-nums;letter-spacing:-.055em;line-height:1.25}.score.pts strong{color:#d7e9ff}.score.bad strong{color:var(--red)}.score small{color:var(--muted);font-size:.7rem;display:block}
+.countdown{text-align:center;padding:0 17px 17px}.time{font-weight:780;font-size:clamp(2.5rem,6vw,4rem);font-variant-numeric:tabular-nums;letter-spacing:-.06em}.time.low{color:var(--amber)}.time.done{color:var(--red)}.progress{height:10px;background:#2e4958;overflow:hidden;border-radius:8px;margin:10px 0}.progress > div{height:100%;background:var(--green);width:0%;transition:width .1s linear}.time-note{font-size:.8rem;color:var(--muted)}
+.state{font-size:1.1rem;min-height:1.4em;margin:6px 0 12px;font-weight:730}.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.step{border-radius:6px;padding:8px 2px;background:#263b49;color:#93a8b7;text-align:center;font-size:.69rem;min-height:42px;display:grid;place-content:center}.step.now{background:#1f5244;color:#c7f9e2;border:1px solid var(--green)}.pose-details{font-size:.82rem;color:var(--muted);margin-top:13px;line-height:1.5;min-height:1.2rem}
+.info{color:var(--muted);font-size:.85rem;line-height:1.6}.info p{margin:8px 0}.info strong{color:var(--text)}.info details{padding:8px 0}summary{cursor:pointer;color:var(--blue);font-weight:690}
+.log{list-style:none;padding:0;margin:5px 0 0;max-height:230px;overflow:auto}.log li{border-bottom:1px solid #344958;padding:8px 0;color:var(--muted);font-size:.82rem;line-height:1.45}.log li strong{color:var(--green)}.log li.no strong{color:var(--red)}.log li span{font-variant-numeric:tabular-nums;color:#c4d6e3;margin-right:5px}.emptylog{color:var(--muted);font-size:.83rem}
+.norms{max-height:295px;overflow:auto;border:1px solid #344b5a;border-radius:9px}table{width:100%;border-collapse:collapse;text-align:right;font-size:.8rem}thead{position:sticky;top:0;background:#2a4050}th,td{padding:7px 12px;border-bottom:1px solid #334957}th:first-child,td:first-child{text-align:left}tbody tr.hit{background:#264938;color:var(--green);font-weight:800}
+.message{color:var(--muted);font-size:.84rem;line-height:1.55;min-height:1.2em}.message.error{color:var(--red)}.message.ok{color:var(--green)}.footer{max-width:1140px;margin:20px auto 0;font-size:.79rem;color:#a5b8c4;line-height:1.65}.more{margin-top:10px}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.stack{grid-template-columns:1fr 1fr;align-items:start}.scores-card{grid-column:1/-1}.stage{aspect-ratio:4/3}}
+@media(max-width:550px){body{padding:max(9px,env(safe-area-inset-top)) max(9px,env(safe-area-inset-right)) max(22px,env(safe-area-inset-bottom)) max(9px,env(safe-area-inset-left))}h1{font-size:1.65rem}.subtitle{font-size:.82rem;margin-bottom:12px}.layout,.stack{gap:11px}.stack{grid-template-columns:1fr}.scores-card{grid-column:auto}.stage{aspect-ratio:3/4}.scores{padding:10px;gap:5px}.score{padding:10px 5px}.score strong{font-size:2.45rem}.score span{font-size:.74rem}.topbar,.instruct{padding:11px}.controls{padding:0 11px 13px}.pad,.setup{padding:13px}.step{font-size:.65rem}.two{grid-template-columns:1fr 1fr}}
+@media(orientation:landscape) and (max-height:450px){.stage{aspect-ratio:16/9}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<div class="eyebrow">Компьютерное зрение · Упражнение № 29</div>
+<h1>Восхождения на тумбу</h1>
+<p class="subtitle">10 минут · платформа 30 см · фиксация наверху · зачёт только после возврата обеих ног на пол.</p>
+<div class="layout">
+<div class="stack">
+<section class="card" aria-label="Видеокамера и разметка">
+<div class="topbar"><b>Камера и контроль движений</b><span id="camStatus" class="badge" role="status">Камера выключена</span></div>
+<div class="stage" id="stage">
+<div class="empty" id="placeholder"><svg viewBox="0 0 90 90" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><rect x="10" y="28" width="60" height="45" rx="7"/><path d="M70 39 83 30v40L70 61M30 28l7-10h12l7 10"/><circle cx="40" cy="51" r="14"/><circle cx="40" cy="51" r="4" fill="currentColor" stroke="none"/></svg><span>Включите камеру, разместите платформу в кадре, затем отметьте уровни пола и тумбы.</span></div>
+<video id="video" muted autoplay playsinline aria-label="Видео с камеры"></video>
+<canvas id="overlay" aria-hidden="true"></canvas>
+<div id="prompt" class="calibprompt" hidden>Коснитесь нужного уровня в изображении</div>
+<div id="flag" class="flag" role="alert" hidden></div>
+</div>
+<div class="instruct"><b>Расположение:</b> снимайте сбоку под небольшим углом, чтобы одновременно видеть обе стопы, колени, туловище, пол и верх тумбы. Телефон должен оставаться неподвижным.</div>
+<div class="controls">
+<button id="camBtn" class="primary" type="button">Включить камеру</button>
+<button id="flipBtn" class="secondary" type="button">Поменять камеру</button>
+<button id="camOffBtn" class="outline" type="button" disabled>Выключить камеру</button>
+</div>
+</section>
+<section class="card setup">
+<h2>1. Настройка упражнения</h2>
+<div class="two">
+<div><label class="fieldlabel" for="age">Возрастная категория</label><select id="age"><option value="young">До 35 лет</option><option value="older">35 лет и старше</option></select></div>
+<div><label class="fieldlabel" for="sound">Звуковые команды</label><select id="sound"><option value="on">Включены</option><option value="off">Выключены</option></select></div>
+</div>
+<p class="setup-note">Используйте устойчивую платформу <b>реальной высотой 30 см</b>. Камера не может автоматически проверить размер тумбы.</p>
+<label style="display:flex;align-items:center;gap:9px;font-size:.86rem;margin:12px 0"><input type="checkbox" id="heightConfirmed" style="accent-color:var(--green);width:20px;height:20px"> Я проверил устойчивость и высоту 30 см</label>
+<p class="fieldlabel">Калибровка по кадру: нажмите кнопку, затем коснитесь нужной линии на видео.</p>
+<div class="linebuttons"><button class="secondary" id="floorBtn" type="button" disabled>Отметить пол</button><button class="secondary" id="stepBtn" type="button" disabled>Верх тумбы</button></div>
+<div class="levels"><div class="level">Пол<b id="floorVal">Не отмечен</b></div><div class="level">Тумба<b id="stepVal">Не отмечена</b></div></div>
+<p class="setup-note">Отмечайте линию уровня подошвы обуви: сначала у пола, затем поверхность тумбы. Если переместили телефон, повторите калибровку.</p>
+<p id="readyMsg" class="readymsg">Подключите камеру и укажите уровни.</p>
+<div class="controls" style="padding:10px 0 0"><button id="marchBtn" class="primary wide" disabled>МАРШ – начать 10 минут</button><button id="finishBtn" class="outline wide" type="button" disabled>Завершить упражнение досрочно</button><button id="newBtn" class="secondary wide" type="button" hidden>Начать новую попытку</button></div>
+</section>
+<section class="card pad">
+<h2>2. Текущий этап и техника</h2>
+<div id="phase" class="state" aria-live="polite">Ожидание начала</div>
+<div class="steps" id="steps"><span class="step now">Обе на полу</span><span class="step">Одна наверху</span><span class="step">Обе наверху</span><span class="step">Одна на полу</span><span class="step">Обе на полу</span></div>
+<div class="pose-details" id="poseDetails">Суставы пока не определены.</div>
+</section>
+</div>
+<div class="stack">
+<section class="card scores-card">
+<div class="scores">
+<div class="score"><span>Засчитано</span><strong id="count">0</strong><small>восхождений</small></div>
+<div class="score bad"><span>НЕ СЧИТАТЬ</span><strong id="rejects">0</strong><small>повторений</small></div>
+<div class="score pts"><span>Баллы</span><strong id="points">–</strong><small>из 100</small></div>
+</div>
+<div class="countdown"><div class="fieldlabel">Время до окончания</div><div class="time" id="clock">10:00</div><div class="progress"><div id="timeBar"></div></div><div id="scoreHint" class="time-note">Минимальный порог: 217 восхождений – 2 балла</div></div>
+</section>
+<section class="card pad">
+<h2>3. Оповещения и протокол</h2>
+<div class="message" id="lastMessage" role="status">События появятся после команды «МАРШ».</div>
+<ul class="log" id="events"><li class="emptylog">Протокол пока пуст.</li></ul>
+<button id="exportBtn" type="button" class="secondary wide more" disabled>Скачать протокол (CSV)</button>
+</section>
+<section class="card pad">
+<h2>4. Таблица начисления баллов</h2>
+<p class="info" id="normIntro">Порог считается достигнутым при количестве восхождений не меньше указанного. Промежуточные значения не интерполируются.</p>
+<div class="norms"><table aria-label="Возрастные нормативы упражнения 29"><thead><tr><th>Баллы</th><th>До 35</th><th>35+</th></tr></thead><tbody id="normRows"></tbody></table></div>
+<p class="setup-note">В предоставленной таблице есть оценки от 2 до 100 баллов. Для результатов ниже порога на 2 балла официальный результат по таблице не указан.</p>
+</section>
+<section class="card pad info">
+<h2>Контроль требований</h2>
+<p>Повторение подтверждается после подъёма <strong>обеих ног на тумбу</strong>, выпрямления ног и туловища, краткой фиксации, последовательного спуска и возврата в исходное положение.</p>
+<p>Если последовательность нарушена или ключевой этап не подтверждён видеокамерой, выдаётся <strong>«НЕ СЧИТАТЬ»</strong> с причиной.</p>
+<details><summary>Ограничения автоматической проверки</summary><p>Одна камера оценивает 2D-координаты суставов. Она не гарантирует определение контакта стоп, реальную высоту поверхности, качество выпрямления в закрытых ракурсах. Длительность программной фиксации 0,34 секунды и угловые пороги – технические эвристики, а не нормы из предоставленного документа. Для официального зачёта нужен контроль уполномоченным лицом.</p></details>
+</section>
+</div>
+</div>
+</main>
+<footer class="footer">Кадры анализируются на устройстве. При первоначальном запуске нужна сеть для загрузки MediaPipe и модели. Доступ к камере в мобильном браузере требует HTTPS. Приложение не определяет высоту платформы автоматически и не является сертифицированной судейской системой.</footer>
+<script type="module" src="./app.mjs"></script>
+</body>
+</html>
